@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игра "Бункер"</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Игра "Бункер"</h1>
+        <div id="gameInfo">
+            <p>Код игры: <span id="displayGameCode"></span></p>
+            <p>Игроков: <span id="playerCount">1</span></p>
+        </div>
+        
+        <div class="game-area">
+            <div class="player-cards">
+                <!-- Карточки игроков будут добавляться динамически -->
+            </div>
+            
+            <div class="my-card">
+                <h2>Моя карточка</h2>
+                <div class="card-content">
+                    <div class="attribute hidden" data-attr="profession">
+                        <h3>Профессия</h3>
+                        <p></p>
+                    </div>
+                    <div class="attribute hidden" data-attr="health">
+                        <h3>Здоровье</h3>
+                        <p></p>
+                    </div>
+                    <div class="attribute hidden" data-attr="hobby">
+                        <h3>Хобби</h3>
+                        <p></p>
+                    </div>
+                    <div class="attribute hidden" data-attr="baggage">
+                        <h3>Багаж</h3>
+                        <p></p>
+                    </div>
+                    <div class="attribute hidden" data-attr="phobia">
+                        <h3>Фобия</h3>
+                        <p></p>
+                    </div>
+                    <div class="attribute hidden" data-attr="character">
+                        <h3>Характер</h3>
+                        <p></p>
+                    </div>
+                    <div class="attribute hidden" data-attr="fact">
+                        <h3>Доп. факт</h3>
+                        <p></p>
+                    </div>
+                </div>
+                <button id="revealRandom">Открыть случайную характеристику</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

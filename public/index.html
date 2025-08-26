@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бункер - Главная</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Игра "Бункер"</h1>
+        <div class="menu">
+            <button id="createGame">Создать игру</button>
+            <button id="joinGame">Присоединиться</button>
+        </div>
+        <div id="gameCodeInput" class="hidden">
+            <input type="text" id="gameCode" placeholder="Код игры">
+            <button id="joinWithCode">Войти</button>
+        </div>
+        
+        <!-- Добавляем контейнер для статуса загрузки -->
+        <div id="loading" style="display: none; text-align: center; padding: 20px;">
+    <p>Загрузка Firebase...</p>
+<!-- Кнопка входа -->
+<div id="auth-container" class="auth-container">
+  <button id="signInButton">Войти через Google</button>
+  <div id="userInfo" class="hidden">
+    <img id="userPhoto" width="40" height="40">
+    <span id="userName"></span>
+    <button id="signOutButton">Выйти</button>
+  </div>
+</div>
+    
+    <!-- Новая инициализация -->
+    <script type="module">
+        // Показываем загрузку
+        document.getElementById('loading').style.display = 'block';
+        
+        try {
+            // Запрашиваем конфиг у сервера
+            const response = await fetch('/api/firebase-config');
+            if (!response.ok) throw new Error('Ошибка загрузки конфига');
+            
+            const config = await response.json();
+            
+            // Инициализируем Firebase
+            const app = firebase.initializeApp(config);
+            
+            // Делаем доступным для других скриптов
+            window.firebaseApp = app;
+            window.database = firebase.database();
+            window.auth = firebase.auth();
+            
+            // Скрываем загрузку
+            document.getElementById('loading').style.display = 'none';
+            
+            // Загружаем основной скрипт
+            const gameScript = document.createElement('script');
+            gameScript.src = 'js/game.js';
+            document.body.appendChild(gameScript);
+            
+        } catch (error) {
+            console.error('Ошибка инициализации Firebase:', error);
+            document.getElementById('loading').innerHTML = `
+                <p style="color: red;">Ошибка загрузки: ${error.message}</p>
+                <button onclick="location.reload()">Перезагрузить</button>
+            `;
+        }
+
+<div id="loading" style="display: none; text-align: center; padding: 20px;">
+    <p>Загрузка Firebase...</p>
+</div>
+
+    </script>
+<!-- В конце body, ПЕРЕД вашими скриптами -->
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+
+<!-- Затем ваш скрипт -->
+<script src="js/init-firebase.js"></script>
+</body>
+</html>
